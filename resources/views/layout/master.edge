@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="{{ config('app.locales.locale') }}">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{{ (title && title != '') ? title + ' - ' + config('app.appName') : config('app.appName') }}</title>
+        <link rel="shortcut icon" href="{{ assetsUrl('images/webhooks.png') }}">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ assetsUrl('images/webhooks.png') }}">
+
+        @section('stylesheet')
+        {{ style('css/bootstrap.min.css') }}
+        {{ style('css/custom.css' + '?v=' + config('app.version')) }}
+        @endsection
+
+    </head>
+    <body ng-app="WebhooksCentral">
+
+        <div class="container-fluid">
+
+            @include('layout.header')
+
+            <section class="my-3">
+                @!section('content')
+            </section>
+            
+
+            @include('layout.footer')
+
+        </div>
+
+        @section('javascript')
+        {{ script('/js/bootstrap.bundle.min.js') }}
+        {{ script('/js/pace.min.js') }}
+        {{ script('/js/angular.min.js') }}
+        {{ script('/js/angular-sanitize.min.js') }}
+        {{ script('/js/script.js' + '?v=' + config('app.version')) }}
+        @endsection
+        
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!-- Modal -->
+<div class="modal fade" id="actionDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" ng-bind="item.id ? 'Edit Action' : 'New Action'"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" ng-disabled="isSaving"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="mb-3">
+                        <label class="form-label">Event <span class="text-danger">*</span></label>
+                        <select class="form-control" ng-class="validate.event_id ? 'is-invalid' : ''" ng-model="item.event_id" ng-options="item.id as item.name for item in events">
+                            <option value="">-- Choose event ---</option>
+                        </select>
+                        <div class="invalid-feedback" ng-if="validate.event_id" ng-bind="validate.event_id"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Endpoint <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" ng-class="validate.end_point ? 'is-invalid' : ''" ng-model="item.end_point" placeholder="https://example.com">
+                        <div class="invalid-feedback" ng-if="validate.end_point" ng-bind="validate.end_point"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="event-name" class="form-label">Method <span class="text-danger">*</span></label>
+                        <select class="form-control" ng-class="validate.method ? 'is-invalid' : ''" ng-model="item.method" ng-options="item.code as item.code for item in methods">
+                            <option value="">-- Choose method ---</option>
+                        </select>
+                        <div class="invalid-feedback" ng-if="validate.method" ng-bind="validate.method"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Config</label>
+                        <textarea rows="4" class="form-control" ng-model="item.config"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="isSaving">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ng-disabled="isSaving">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

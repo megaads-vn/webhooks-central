@@ -1,0 +1,63 @@
+<!-- Modal -->
+<div class="modal fade" id="logDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Log Action</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p><b>Action:</b> [{ log.method }] - [{ log.end_point }]</p>
+                <div class="row mb-3">
+                    <div class="col-sm">
+                      <input type="text" class="form-control" placeholder="Keyword" ng-model="filterLog.terms" ng-keypress="enterEvent($event, 'log')">
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-control" ng-model="filterLog.status_code" ng-options="item.code as item.code for item in statuses">
+                            <option value="">-- All status --</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-primary" ng-click="findLog();">Find</button>
+                        <button type="button" class="btn btn-secondary" ng-click="filterLog = {}; findLog();">Reset</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 5%">#</th>
+                                <th scope="col" class="col-md-2">Timestamp</th>
+                                <th scope="col" class="col-md-1">Status</th>
+                                <th scope="col">Request</th>
+                                <th scope="col">Response</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in itemLogs track by $index">
+                                <th>[{ $index + 1 }]</th>
+                                <td>
+                                    <span class="badge bg-secondary" style="display: block" ng-if="item.created_at">[{ summarizeDateTime(item.created_at, true) }]</span>
+                                </td>
+                                <td>[{ item.status_code }]</td>
+                                <td>
+                                    <pre style="font-size: 10px">[{ item.request }]</pre>
+                                </td>
+                                <td>
+                                    <pre style="font-size: 10px">[{ item.response }]</pre>
+                                </td>
+                            </tr>
+                            <tr ng-if="itemLogs.length == 0">
+                                <td colspan="5">No data found!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

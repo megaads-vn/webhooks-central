@@ -1,0 +1,21 @@
+@if(accessPagesCount && accessPageId && accessFind)
+<nav ng-show="{{ accessPagesCount }} > 0" ng-init="steps = [ - 5, - 4, - 3, - 2, - 1, 0, 1, 2, 3, 4, 5 ]">
+    <ul class="pagination justify-content-end">
+        <li class="page-item">
+            <a class="page-link" href="javascript:;" ng-click="{{ accessPageId }} = 0; {{ accessFind }}">
+                <span>First</span>
+            </a>
+        </li>
+        
+        <li class="page-item [{step == 0 ? 'active' : ''}]" ng-repeat="step in steps" ng-show="$parent.{{ accessPageId }} + step >= 0 && $parent.{{ accessPageId }} + step < $parent.{{ accessPagesCount }}">
+            <a class="page-link" href="javascript:;" ng-click="$parent.{{ accessPageId }} = $parent.{{ accessPageId }} + step;$parent.{{ accessFind }}">[{$parent.{{ accessPageId }} + step + 1}]</a>
+        </li>
+        
+        <li class="page-item">
+            <a class="page-link" href="javascript:;" ng-click="{{ accessPageId }} = {{ accessPagesCount }} -1; {{ accessFind }}">
+                <span>Last</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+@endif

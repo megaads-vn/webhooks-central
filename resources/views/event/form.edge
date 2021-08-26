@@ -1,0 +1,28 @@
+<!-- Modal -->
+<div class="modal fade" id="eventDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" ng-bind="item.id ? 'Edit Event' : 'New Event'"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" ng-disabled="isSaving"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="mb-3">
+                        <label for="event-name" class="form-label">Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" ng-class="validate.name ? 'is-invalid' : ''" id="event-name" ng-model="item.name">
+                        <div class="invalid-feedback" ng-if="validate.name" ng-bind="validate.name"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="event-description" class="form-label">Description</label>
+                        <textarea rows="4" class="form-control" id="event-description" ng-model="item.description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="isSaving">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ng-disabled="isSaving">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

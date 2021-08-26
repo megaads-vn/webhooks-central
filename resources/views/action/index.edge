@@ -1,0 +1,28 @@
+@layout('layout.master')
+
+@section('javascript')
+	@super
+    {{ script('/js/controller/action-controller.js' + '?v=' + config('app.version')) }}
+@endsection
+
+@section('content')
+    <div class="row" ng-controller="ActionController" ng-cloak>
+        <div class="col-md-12">
+            <div class="accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <div class="accordion-button"> Action List </div>
+                    </h2>
+                    <div class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            @include('action.filter')
+                            @include('action.list')
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @include('action.form')
+        @include('action.log')
+    </div>
+@endsection

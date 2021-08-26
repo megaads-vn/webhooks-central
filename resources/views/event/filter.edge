@@ -1,0 +1,16 @@
+<div class="row mb-3">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm">
+      <input type="text" class="form-control" placeholder="Keyword" ng-model="filter.terms" ng-keypress="enterEvent($event)">
+    </div>
+    <div class="col-sm-2">
+        <button type="button" class="btn btn-primary" ng-click="pageId = 0; find();">Find</button>
+        <button type="button" class="btn btn-secondary" ng-click="pageId = 0; filter = {}; find();">Reset</button>
+    </div>
+    <div class="col-sm-2">
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-success" ng-click="openDialog()">Add New</button>
+        </div>
+    </div>
+</div>

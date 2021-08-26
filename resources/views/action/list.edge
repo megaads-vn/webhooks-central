@@ -1,0 +1,37 @@
+<div class="table-responsive">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 5%">#</th>
+                <th scope="col" class="col-md-3">Endpoint</th>
+                <th scope="col" style="width: 7%">Method</th>
+                <th scope="col" style="col-md-1">Event</th>
+                <th scope="col" class="col-md-1">Timestamp</th>
+                <th scope="col" class="col-md-3">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items track by $index">
+                <th scope="row">[{ $index + 1 }]</th>
+                <td>[{ item.end_point }]</td>
+                <td>[{ item.method }]</td>
+                <td>[{ getByField(events, 'id', item.event_id).name }]</td>
+                <td>
+                    <span class="badge bg-secondary mb-1" style="display: block" ng-if="item.created_at">[{ summarizeDateTime(item.created_at, true) }]</span>
+                    <span class="badge bg-secondary" style="display: block" ng-if="item.updated_at">[{ summarizeDateTime(item.updated_at, true) }]</span>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info" ng-click="openLog(item)">Log</button>
+                    <button type="button" class="btn btn-warning" ng-click="clone(item)">Clone</button>
+                    <button type="button" class="btn btn-success" ng-click="openDialog(item)">Edit</button>
+                    <button type="button" class="btn btn-danger" ng-click="remove(item)">Remove</button>
+                </td>
+            </tr>
+            <tr ng-if="items.length == 0">
+                <td colspan="6">No data found!</td>
+            </tr>
+        </tbody>
+    </table>
+
+    @!component('common.pagination', accessPageId = "pageId", accessPagesCount = "pagesCount", accessFind = "find()" )
+</div>
