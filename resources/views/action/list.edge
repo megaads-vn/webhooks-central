@@ -6,6 +6,7 @@
                 <th scope="col" class="col-md-3">Endpoint</th>
                 <th scope="col" style="width: 7%">Method</th>
                 <th scope="col" style="col-md-1">Event</th>
+                <th scope="col" style="col-md-1">Config</th>
                 <th scope="col" class="col-md-1">Timestamp</th>
                 <th scope="col" class="col-md-3">Action</th>
             </tr>
@@ -16,6 +17,7 @@
                 <td>[{ item.end_point }]</td>
                 <td>[{ item.method }]</td>
                 <td>[{ getByField(events, 'id', item.event_id).name }]</td>
+                <td>[{ item.config }]</td>
                 <td>
                     <span class="badge bg-secondary mb-1" style="display: block" ng-if="item.created_at">[{ summarizeDateTime(item.created_at, true) }]</span>
                     <span class="badge bg-secondary" style="display: block" ng-if="item.updated_at">[{ summarizeDateTime(item.updated_at, true) }]</span>
@@ -28,7 +30,7 @@
                 </td>
             </tr>
             <tr ng-if="items.length == 0">
-                <td colspan="6">No data found!</td>
+                <td colspan="7">No data found!</td>
             </tr>
         </tbody>
     </table>

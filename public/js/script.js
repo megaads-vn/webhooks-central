@@ -3,7 +3,7 @@
 const STATUS_SUCCESS = "successful";
 const STATUS_FAIL = "fail";
 
-var system = angular.module('WebhooksCentral', ['ngSanitize'], function ($interpolateProvider) {
+var system = angular.module('WebhooksCentral', ['ngSanitize', 'ngclipboard'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[{');
     $interpolateProvider.endSymbol('}]');
 });

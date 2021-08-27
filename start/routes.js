@@ -18,7 +18,7 @@ const Route = use('Route')
 
 Route.get('/', 'HomeController.index').as('home');
 Route.post('/authenticate', 'HomeController.authenticate').as('authenticate');
-Route.get('/listener/:event', 'WebhooksController.index').as('listener');
+Route.route('/listener/:event', 'WebhooksController.listener', ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']).as('listener');
 Route.get('/events', 'System/EventController.index').as('events').middleware(['token']);
 Route.get('/actions', 'System/ActionController.index').as('actions').middleware(['token']);
 

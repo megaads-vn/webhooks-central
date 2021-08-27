@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="logDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Log Action</h5>
@@ -42,10 +42,12 @@
                                 </td>
                                 <td>[{ item.status_code }]</td>
                                 <td>
-                                    <pre style="font-size: 10px">[{ item.request }]</pre>
+                                    <span class="badge rounded-pill bg-dark log-copy" ngclipboard data-clipboard-target="#action-request-[{ item.id }]">Copy</span>
+                                    <code class="log-text" id="action-request-[{ item.id }]">[{ item.request }]</code>
                                 </td>
                                 <td>
-                                    <pre style="font-size: 10px">[{ item.response }]</pre>
+                                    <span class="badge rounded-pill bg-dark log-copy" ngclipboard data-clipboard-target="#action-response-[{ item.id }]">Copy</span>
+                                    <code class="log-text" id="action-response-[{ item.id }]">[{ item.response }]</code>
                                 </td>
                             </tr>
                             <tr ng-if="itemLogs.length == 0">

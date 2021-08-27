@@ -42,6 +42,8 @@ Date.prototype.getDateTime = (character = ':') => {
     return year + "-" + month + "-" + day + " " + hour + character + min + character + sec;
 }
 
-process.on('adonis:server:start', () => {
+const actionTask = require('./app/Tasks/ActionTask');
 
+process.on('adonis:server:start', () => {
+    actionTask.cron();
 });

@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="logDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Log Event - [{ log.name }]</h5>
@@ -44,7 +44,8 @@
                                     <p style="margin-bottom: 5px">User-Agent: [{ item.user_agent }]</p>
                                 </td>
                                 <td>
-                                    <pre style="font-size: 12px">[{ item.request }]</pre>
+                                    <span class="badge rounded-pill bg-dark log-copy" ngclipboard data-clipboard-target="#event-request-[{ item.id }]">Copy</span>
+                                    <code class="log-text" id="event-request-[{ item.id }]">[{ item.request }]</code>
                                 </td>
                             </tr>
                             <tr ng-if="itemLogs.length == 0">
