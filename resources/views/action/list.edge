@@ -3,18 +3,18 @@
         <thead>
             <tr>
                 <th scope="col" style="width: 5%">#</th>
-                <th scope="col" class="col-md-3">Endpoint</th>
+                <th scope="col" class="col-md-4">Endpoint</th>
                 <th scope="col" style="width: 7%">Method</th>
                 <th scope="col" style="col-md-1">Event</th>
                 <th scope="col" style="col-md-1">Config</th>
                 <th scope="col" class="col-md-1">Timestamp</th>
-                <th scope="col" class="col-md-3">Action</th>
+                <th scope="col" class="col-md-2">Action</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in items track by $index">
                 <th scope="row">[{ $index + 1 }]</th>
-                <td>[{ item.end_point }]</td>
+                <td style="word-break: break-all;">[{ item.end_point }]</td>
                 <td>[{ item.method }]</td>
                 <td>[{ getByField(events, 'id', item.event_id).name }]</td>
                 <td>[{ item.config }]</td>
