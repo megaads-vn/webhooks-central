@@ -13,6 +13,8 @@ class WebhooksController extends BaseController {
             let eventLog = new EventLog;
             let input = request.all();
 
+            console.log("Headers", request.headers());
+
             let fillable = {
                 event_id: event.id,
                 ip: request.ip(),
