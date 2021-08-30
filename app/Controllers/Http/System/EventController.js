@@ -120,7 +120,7 @@ class EventController extends BaseController {
             query.where(function (query) {
                 query.where('ip', 'LIKE', `%${input.terms}%`);
                 query.orWhere('user_agent', 'LIKE', `%${input.terms}%`);
-                query.orWhere('data', 'LIKE', `%${input.terms}%`);
+                query.orWhere('request', 'LIKE', `%${input.terms}%`);
             });
         }
         if (input.method && input.method != '') {
