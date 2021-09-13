@@ -8,7 +8,7 @@
                 <th scope="col" style="col-md-1">Event</th>
                 <th scope="col" style="col-md-1">Config</th>
                 <th scope="col" class="col-md-1">Timestamp</th>
-                <th scope="col" class="col-md-3">Action</th>
+                <th scope="col" class="col-md-1">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -23,10 +23,12 @@
                     <span class="badge bg-secondary" style="display: block" ng-if="item.updated_at">[{ summarizeDateTime(item.updated_at, true) }]</span>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-info" ng-click="openLog(item)">Log</button>
-                    <button type="button" class="btn btn-warning" ng-click="clone(item)">Clone</button>
-                    <button type="button" class="btn btn-success" ng-click="openDialog(item)">Edit</button>
-                    <button type="button" class="btn btn-danger" ng-click="remove(item)">Remove</button>
+                    <div class="action-button-content">
+                        <button type="button" class="btn btn-info" ng-click="openLog(item)">Log</button>
+                        <button type="button" class="btn btn-warning" ng-click="clone(item)">Clone</button>
+                        <button type="button" class="btn btn-success" ng-click="openDialog(item)">Edit</button>
+                        <button type="button" class="btn btn-danger" ng-click="remove(item)">Remove</button>
+                    </div>
                 </td>
             </tr>
             <tr ng-if="items.length == 0">

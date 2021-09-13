@@ -88,3 +88,13 @@
 	-webkit-line-clamp: 4; /* number of lines to show */
 	-webkit-box-orient: vertical;
 }
+
+.event-button-content {
+	width: 205px;
+	text-align: center;
+}
+
+.action-button-content {
+	width: 275px;
+	text-align: center;
+}
