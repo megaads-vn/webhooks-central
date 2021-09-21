@@ -1,4 +1,4 @@
-system.controller('EventController', function ($scope, $rootScope, $http, $timeout) {
+system.controller('EventController', function ($scope, $rootScope, $http, $timeout, $window) {
     
     this.prototype = new BaseController($scope, $rootScope);
     $scope.pageId = 0; $scope.pageSize = 50; $scope.pagesCount = 0;
@@ -153,7 +153,13 @@ system.controller('EventController', function ($scope, $rootScope, $http, $timeo
                 }
             });
         }
-        
+    }
+
+    $scope.getCopyUrl = function (name, event) {
+        if (name && name != '') {
+            var currentURL = new URL($window.location.href);
+            return currentURL.origin + '/listener/' + name;
+        }
     }
 
     $scope.init();
