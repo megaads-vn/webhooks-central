@@ -42,12 +42,16 @@
                                 </td>
                                 <td>[{ item.status_code }]</td>
                                 <td>
-                                    <span ng-if="item.request" class="badge rounded-pill bg-dark log-copy" ngclipboard data-clipboard-target="#action-request-[{ item.id }]">Copy</span>
-                                    <code class="log-text" id="action-request-[{ item.id }]">[{ item.request }]</code>
+                                    <div class="log-container">
+                                        <span ng-if="item.request" class="badge rounded-pill bg-dark log-copy" ngclipboard data-clipboard-target="#action-request-[{ item.id }]">Copy</span>
+                                        <code class="log-text" id="action-request-[{ item.id }]">[{ item.request }]</code>
+                                    </div>
                                 </td>
                                 <td>
-                                    <span ng-if="item.response" class="badge rounded-pill bg-dark log-copy" ngclipboard data-clipboard-target="#action-response-[{ item.id }]">Copy</span>
-                                    <code class="log-text" id="action-response-[{ item.id }]">[{ item.response }]</code>
+                                    <div class="log-container">
+                                        <span ng-if="item.response" class="badge rounded-pill bg-dark log-copy" ngclipboard data-clipboard-target="#action-response-[{ item.id }]">Copy</span>
+                                        <code class="log-text" id="action-response-[{ item.id }]">[{ item.response }]</code>
+                                    </div>
                                 </td>
                             </tr>
                             <tr ng-if="itemLogs.length == 0">

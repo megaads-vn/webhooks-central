@@ -155,10 +155,20 @@ system.controller('EventController', function ($scope, $rootScope, $http, $timeo
         }
     }
 
-    $scope.getCopyUrl = function (name, event) {
+    $scope.getCopyUrl = function (name) {
         if (name && name != '') {
             var currentURL = new URL($window.location.href);
             return currentURL.origin + '/listener/' + name;
+        }
+    }
+
+    $scope.copyTooltip = function (event) {
+        if (event && event.target) {
+            var tooltip = new bootstrap.Tooltip(event.target, {title: 'Copied!', trigger: 'click'});
+            tooltip.show();
+            $timeout(function () {
+                tooltip.hide();
+            }, 1000);
         }
     }
 

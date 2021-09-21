@@ -2,6 +2,7 @@
 
 @section('javascript')
 	@super
+    {{ script('/js/popper.min.js' + '?v=' + config('app.version')) }}
     {{ script('/js/controller/event-controller.js' + '?v=' + config('app.version')) }}
 @endsection
 

@@ -20,7 +20,7 @@
                 </td>
                 <td>
                     <div class="event-button-content">
-                        <button type="button" class="btn btn-dark" ngclipboard data-clipboard-text="[{ getCopyUrl(item.name, $event) }]">Copy</button>
+                        <button type="button" class="btn btn-primary" ng-click="copyTooltip($event)" ngclipboard data-clipboard-text="[{ getCopyUrl(item.name) }]">Copy</button>
                         <button type="button" class="btn btn-info" ng-click="openLog(item)">Log</button>
                         <button type="button" class="btn btn-success" ng-click="openDialog(item)">Edit</button>
                         <button type="button" class="btn btn-danger" ng-click="remove(item)">Remove</button>

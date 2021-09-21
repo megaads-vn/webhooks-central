@@ -75,18 +75,26 @@
 	100% { transform: rotate(360deg); transform: rotate(360deg); }
 }
 
+.log-container {
+	position: relative;
+}
+
 .log-copy {
+	position: absolute;
+	top: 0;
+	left: 0;
 	cursor: pointer;
 }
 
 .log-text {
 	font-size: 12px;
-	display: inline !important;
+	display: block !important;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 4; /* number of lines to show */
 	-webkit-box-orient: vertical;
+	text-indent: 50px;
 }
 
 .event-button-content {

@@ -44,8 +44,10 @@
                                     <p style="margin-bottom: 5px">User-Agent: [{ item.user_agent }]</p>
                                 </td>
                                 <td>
-                                    <span ng-if="item.request" class="badge rounded-pill bg-dark log-copy" ngclipboard data-clipboard-target="#event-request-[{ item.id }]">Copy</span>
-                                    <code class="log-text" id="event-request-[{ item.id }]">[{ item.request }]</code>
+                                    <div class="log-container">
+                                        <span ng-if="item.request" class="badge rounded-pill bg-dark log-copy" ngclipboard data-clipboard-target="#event-request-[{ item.id }]">Copy</span>
+                                        <code class="log-text" id="event-request-[{ item.id }]">[{ item.request }]</code>
+                                    </div>
                                 </td>
                             </tr>
                             <tr ng-if="itemLogs.length == 0">
