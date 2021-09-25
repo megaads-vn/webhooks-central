@@ -90,7 +90,7 @@ system.controller('ActionController', function ($scope, $rootScope, $http, $time
             pageId: $scope.pageId,
             pageSize: $scope.pageSize
         };
-        var fillable = ['end_point', 'method', 'event_id'];
+        var fillable = ['terms', 'end_point', 'method', 'event_id'];
         fillable.forEach(function (field) {
             if ($scope.filter[field] && $scope.filter[field] != '') {
                 retVal[field] = $scope.filter[field];
