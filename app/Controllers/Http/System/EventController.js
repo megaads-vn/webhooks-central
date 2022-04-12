@@ -117,12 +117,9 @@ class EventController extends BaseController {
         let input = request.all();
     
         if (input.terms && input.terms != '') {
-            query.where(function (query) {
-                query.where('ip', 'LIKE', `%${input.terms}%`);
-                query.orWhere('user_agent', 'LIKE', `%${input.terms}%`);
-                query.orWhere('request', 'LIKE', `%${input.terms}%`);
-            });
+            query.whereRaw('MATCH(ip, user_agent, request) AGAINST(? IN NATURAL LANGUAGE MODE)', [input.terms]);
         }
+
         if (input.method && input.method != '') {
             query.where('method', '=', input.method);
         }
