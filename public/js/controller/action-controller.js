@@ -197,7 +197,7 @@ system.controller('ActionController', function ($scope, $rootScope, $http, $time
     $scope.resend = function (item) {
         $http.post('/service/action/resend', item).then(function (response) {
             if (response.data.status == STATUS_SUCCESS) {
-                item.is_send = 1;
+                item.is_sent = 1;
             } else {
                 alert('Error. ' + response.data.message);
             }
