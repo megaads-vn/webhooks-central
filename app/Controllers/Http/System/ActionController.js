@@ -127,7 +127,9 @@ class ActionController extends BaseController {
         let action = await Action.find(request.input('action_id'));
         if (action.id) {
             retVal = this.getSuccessStatus();
-            RequestService(action.toJSON(), input, null);
+            RequestService(action.toJSON(), input, function (error, statusCode) {
+                console.log("statusCode", statusCode);
+            });
         }
         return response.json(retVal);
     }
