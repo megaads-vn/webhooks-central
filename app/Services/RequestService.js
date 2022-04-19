@@ -14,7 +14,7 @@ function RequestService(action, input, callback) {
         params.body = JSON.parse(input);
         params.json = true;
     }
-    console.log("request", params);
+   
     request(params, async (error, response, body) => {
         let logAction = new ActionLog;
         let fillable = {
