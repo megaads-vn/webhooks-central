@@ -194,6 +194,16 @@ system.controller('ActionController', function ($scope, $rootScope, $http, $time
         
     }
 
+    $scope.resend = function (item, $event) {
+        $http.post('/service/action/resend', item).then(function (response) {
+            if (response.data.status == STATUS_SUCCESS) {
+                $event.target.innerHTML = 'Sent.....';
+            } else {
+                alert('Error. ' + response.data.message);
+            }
+        });
+    }
+
     $scope.init();
 
 });

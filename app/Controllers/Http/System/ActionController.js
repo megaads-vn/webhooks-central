@@ -3,6 +3,7 @@
 const Action = use('App/Models/Action');
 const ActionLog = use('App/Models/ActionLog');
 const BaseController = use('App/Controllers/Http/BaseController');
+const RequestService = use('App/Services/RequestService');
 const { validate } = use('Validator');
 
 class ActionController extends BaseController {
@@ -117,6 +118,17 @@ class ActionController extends BaseController {
         }
 
         retVal.data = await query.forPage(pageId + 1, pageSize).orderBy('id', 'desc').fetch();
+        return response.json(retVal);
+    }
+
+    async resend ({ request, response }) {
+        let retVal = this.getDefaultStatus();
+        let input = request.input('request');
+        let action = await Action.find(request.input('action_id'));
+        if (action.id) {
+            retVal = this.getSuccessStatus();
+            RequestService(action.toJSON(), input, null);
+        }
         return response.json(retVal);
     }
 }
