@@ -30,9 +30,9 @@
                                 <th scope="col" style="width: 5%">#</th>
                                 <th scope="col" class="col-md-2">Timestamp</th>
                                 <th scope="col" class="col-md-1">Status</th>
+                                <th scope="col" class="col-md-1"></th>
                                 <th scope="col">Request</th>
                                 <th scope="col">Response</th>
-                                <th scope="col" class="col-md-1"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,6 +42,9 @@
                                     <span class="badge bg-secondary" style="display: block" ng-if="item.created_at">[{ summarizeDateTime(item.created_at, true) }]</span>
                                 </td>
                                 <td>[{ item.status_code }]</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-outline-dark" ng-click="resend(item, $event)" ng-bind="item.is_sent ? 'Sent.....' : 'Resend'"></button>
+                                </td>
                                 <td>
                                     <div class="log-container">
                                         <span ng-if="item.request" class="badge rounded-pill bg-dark log-copy" ngclipboard data-clipboard-target="#action-request-[{ item.id }]">Copy</span>
@@ -53,9 +56,6 @@
                                         <span ng-if="item.response" class="badge rounded-pill bg-dark log-copy" ngclipboard data-clipboard-target="#action-response-[{ item.id }]">Copy</span>
                                         <code class="log-text" id="action-response-[{ item.id }]">[{ item.response }]</code>
                                     </div>
-                                </td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-outline-dark" ng-click="resend(item, $event)">Resend</button>
                                 </td>
                             </tr>
                             <tr ng-if="itemLogs.length == 0">

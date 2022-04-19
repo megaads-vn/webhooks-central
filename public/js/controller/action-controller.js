@@ -194,10 +194,10 @@ system.controller('ActionController', function ($scope, $rootScope, $http, $time
         
     }
 
-    $scope.resend = function (item, $event) {
+    $scope.resend = function (item) {
         $http.post('/service/action/resend', item).then(function (response) {
             if (response.data.status == STATUS_SUCCESS) {
-                $event.target.innerHTML = 'Sent.....';
+                item.is_send = 1;
             } else {
                 alert('Error. ' + response.data.message);
             }
