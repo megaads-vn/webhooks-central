@@ -16,18 +16,16 @@ function RequestService(action, input, callback) {
     }
    
     request(params, async (error, response, body) => {
-        let logAction = new ActionLog;
         let fillable = {
             action_id: action.id,
         };
+        if (response && response.statusCode) {
+            fillable.status_code = response.statusCode || 500;
+        }
         if (input != '') {
             fillable.request = input;
         }
-        
-        if (response && response.statusCode) {
-            fillable.status_code = response.statusCode || 500;
-        } 
-        
+       
         if (error) {
             fillable.response = JSON.stringify(error);
         } else if (body) {
@@ -39,11 +37,14 @@ function RequestService(action, input, callback) {
             }
         }
 
-        logAction.merge(fillable);
-        await logAction.save();
+        if (!action.dont_save_log) {
+            let logAction = new ActionLog;
+            logAction.merge(fillable);
+            await logAction.save();
+        }
 
-        if (callback) {
-            if (!response) {
+        if (typeof callback == "function") {
+            if (error || fillable.status_code >= 400) {
                 let errorCallback = {
                     action_id: action.id,
                     request: input,

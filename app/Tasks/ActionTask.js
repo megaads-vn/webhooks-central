@@ -17,6 +17,7 @@ class ActionTask {
                 if (element.action && element.action.id) {
                     let action = element.action;
                     if (!action.config || action.config == '' || inputJSON.indexOf(action.config) > -1) {
+                        action.dont_save_log = true;
                         RequestService(action, inputJSON, async (error, success) => {
                             if (error) {
                                 await ActionFail.query().where('id', '=', element.id).update({quantity: element.quantity + 1});
