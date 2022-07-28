@@ -37,11 +37,9 @@ function RequestService(action, input, callback) {
             }
         }
 
-        if (!action.dont_save_log) {
-            let logAction = new ActionLog;
-            logAction.merge(fillable);
-            await logAction.save();
-        }
+        let logAction = new ActionLog;
+        logAction.merge(fillable);
+        await logAction.save();
 
         if (typeof callback == "function") {
             if (error || fillable.status_code >= 400) {
@@ -50,7 +48,7 @@ function RequestService(action, input, callback) {
                     request: input,
                     quantity: 0
                 };
-                callback(errorCallback, null);
+                callback({ error: error, data: errorCallback }, null);
             } else {
                 callback(null, response.statusCode);
             }

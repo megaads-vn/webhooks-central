@@ -17,7 +17,6 @@ class ActionTask {
                 if (element.action && element.action.id) {
                     let action = element.action;
                     if (!action.config || action.config == '' || inputJSON.indexOf(action.config) > -1) {
-                        action.dont_save_log = true;
                         action.retry = 1;
                         RequestService(action, inputJSON, async (error, success) => {
                             if (error) {
