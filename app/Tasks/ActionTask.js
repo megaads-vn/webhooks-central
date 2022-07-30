@@ -3,12 +3,21 @@
 const Config = use('Config');
 const ActionFail = use('App/Models/ActionFail');
 const RequestService = use('App/Services/RequestService');
+const moment = require('moment');
 
 class ActionTask {
 
     async cron() {
         setInterval(async () => {
-            let fails = await ActionFail.query().with('action').where('quantity', '<=', Config.get('webhook.try')).limit(30).fetch();
+            let failTime = moment().subtract(30, 'minutes').format('YYYY-DD-MM HH:mm:ss');
+            let fails = await ActionFail.query()
+                                        .with('action')
+                                        .where('quantity', '<=', Config.get('webhook.try'))
+                                        .where('updated_at', '<', failTime)
+                                        .orderBy('id', 'ASC')
+                                        .limit(30)
+                                        .fetch();
+                                        
             fails.toJSON().forEach(element => {
                 let inputJSON = '';
                 if (element.request && element.request != '') {
