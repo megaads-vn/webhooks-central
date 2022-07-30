@@ -8,7 +8,7 @@ class ActionTask {
 
     async cron() {
         setInterval(async () => {
-            let fails = await ActionFail.query().with('action').where('quantity', '<=', Config.get('webhook.try')).fetch();
+            let fails = await ActionFail.query().with('action').where('quantity', '<=', Config.get('webhook.try')).limit(30).fetch();
             fails.toJSON().forEach(element => {
                 let inputJSON = '';
                 if (element.request && element.request != '') {
