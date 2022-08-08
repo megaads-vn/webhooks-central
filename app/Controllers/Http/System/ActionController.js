@@ -147,17 +147,19 @@ class ActionController extends BaseController {
         let action = await Action.find(actionId);
         if (action.id && requestFails) {
             requestFails = requestFails.toJSON();
+            console.log("requestFails", requestFails.length);
         
             for (var i in requestFails) {
                 let item = requestFails[i];
-                RequestService(action.toJSON(), item.request, (error, statusCode) => {
+                RequestService(action.toJSON(), item.request, async (error, statusCode) => {
                     console.log("statusCode", statusCode);
-                    ActionLog.query().where('id', '=', item.id).update({ status_code: statusCode });
+                    await ActionLog.query().where('id', '=', item.id).update({ status_code: statusCode });
                 });
             }
 
             retVal = this.getSuccessStatus();
         }
+        return response.json(retVal);
     }
 }
 
