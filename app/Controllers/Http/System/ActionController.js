@@ -133,6 +133,32 @@ class ActionController extends BaseController {
         }
         return response.json(retVal);
     }
+
+    async retry({ request, response }) {
+        let retVal = this.getDefaultStatus();
+        let actionId = request.input('action_id', null);
+        let requestFails = await ActionLog.query()
+                                    .where('status_code', '=', 404)
+                                    .where('action_id', '=', actionId)
+                                    .where('request', 'LIKE', '%API_B%')
+                                    .select('id', 'request')
+                                    .fetch();
+        
+        let action = await Action.find(actionId);
+        if (action.id && requestFails) {
+            requestFails = requestFails.toJSON();
+        
+            for (var i in requestFails) {
+                let item = requestFails[i];
+                RequestService(action.toJSON(), item.request, (error, statusCode) => {
+                    console.log("statusCode", statusCode);
+                    ActionLog.query().where('id', '=', item.id).update({ status_code: statusCode });
+                });
+            }
+
+            retVal = this.getSuccessStatus();
+        }
+    }
 }
 
 module.exports = ActionController

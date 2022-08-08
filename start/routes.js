@@ -31,6 +31,7 @@ Route.group(() => {
 
     Route.get('action/log/:id', 'System/ActionController.log').as('logAction');
     Route.post('action/resend', 'System/ActionController.resend').as('resendAction');
+    Route.post('action/retry', 'System/ActionController.retry').as('retryAction');
     Route.get('action/:id?', 'System/ActionController.find').as('findAction');
     Route.post('action', 'System/ActionController.create').as('createAction');
     Route.patch('action/:id', 'System/ActionController.update').as('updateAction');
