@@ -150,7 +150,7 @@ class ActionController extends BaseController {
                 let item = requestFails[i];
                 RequestService(action.toJSON(), item.request, async (error, statusCode) => {
                     console.log("statusCode", statusCode);
-                    await ActionLog.query().where('id', '=', item.id).update({ status_code: statusCode });
+                    // await ActionLog.query().where('id', '=', item.id).update({ status_code: statusCode });
                 });
             }
 
