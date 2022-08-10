@@ -138,17 +138,14 @@ class ActionController extends BaseController {
         let retVal = this.getDefaultStatus();
         let actionId = request.input('action_id', null);
         let requestFails = await ActionLog.query()
-                                    .where('status_code', '=', 404)
                                     .where('action_id', '=', actionId)
-                                    .where('request', 'LIKE', '%API_B%')
+                                    .where('response', '=', '{"status":"fail","message":"Order Not Found."}')
                                     .select('id', 'request')
                                     .fetch();
         
         let action = await Action.find(actionId);
         if (action.id && requestFails) {
-            requestFails = requestFails.toJSON();
-            console.log("requestFails", requestFails.length);
-        
+            requestFails = requestFails.toJSON();        
             for (var i in requestFails) {
                 let item = requestFails[i];
                 RequestService(action.toJSON(), item.request, async (error, statusCode) => {
