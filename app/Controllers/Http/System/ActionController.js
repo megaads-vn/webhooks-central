@@ -143,19 +143,19 @@ class ActionController extends BaseController {
         let resourceIds = request.input('resource_ids');
 
         if (action && action.id) {
-            resourceIds.forEach(resourceId => {
+            for (var resourceId of resourceIds) {
                 let lastLog = await ActionLog.query()
-                                    .where('action_id', '=', actionId)
-                                    .where('request', 'LIKE', `%${resourceId}%`)
-                                    .select('id', 'request')
-                                    .orderBy('id', 'DESC')
-                                    .first();
+                                .where('action_id', '=', actionId)
+                                .where('request', 'LIKE', `%${resourceId}%`)
+                                .select('id', 'request')
+                                .orderBy('id', 'DESC')
+                                .first();
                 if (lastLog && lastLog.id) {
                     RequestService(action, lastLog.request, async (error, statusCode) => {
                         console.log("statusCode", statusCode);
                     });
                 }
-            });
+            }
             retVal = this.getSuccessStatus();
         }
         return response.json(retVal);
