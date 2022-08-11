@@ -137,23 +137,25 @@ class ActionController extends BaseController {
     async retry({ request, response }) {
         let retVal = this.getDefaultStatus();
         let actionId = request.input('action_id', null);
-        let requestFails = await ActionLog.query()
-                                    .where('action_id', '=', actionId)
-                                    .where('response', '=', '{"status":"fail","message":"Order Not Found."}')
-                                    .select('id', 'request')
-                                    .fetch();
-        
-        let action = await Action.find(actionId);
-        if (action.id && requestFails) {
-            requestFails = requestFails.toJSON();        
-            for (var i in requestFails) {
-                let item = requestFails[i];
-                RequestService(action.toJSON(), item.request, async (error, statusCode) => {
-                    console.log("statusCode", statusCode);
-                    // await ActionLog.query().where('id', '=', item.id).update({ status_code: statusCode });
-                });
-            }
+        let action = await Action.findOrFail(actionId);
+        action = action.toJSON();
 
+        let resourceIds = request.input('resource_ids');
+
+        if (action && action.id) {
+            resourceIds.forEach(resourceId => {
+                let lastLog = await ActionLog.query()
+                                    .where('action_id', '=', actionId)
+                                    .where('request', 'LIKE', `%${resourceId}%`)
+                                    .select('id', 'request')
+                                    .orderBy('id', 'DESC')
+                                    .first();
+                if (lastLog && lastLog.id) {
+                    RequestService(action, lastLog.request, async (error, statusCode) => {
+                        console.log("statusCode", statusCode);
+                    });
+                }
+            });
             retVal = this.getSuccessStatus();
         }
         return response.json(retVal);
