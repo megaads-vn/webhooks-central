@@ -21,7 +21,6 @@ Route.post('/authenticate', 'HomeController.authenticate').as('authenticate');
 Route.route('/listener/:event', 'WebhooksController.listener', ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']).as('listener');
 Route.get('/events', 'System/EventController.index').as('events').middleware(['token']);
 Route.get('/actions', 'System/ActionController.index').as('actions').middleware(['token']);
-Route.route('/service/action/retry', 'System/ActionController.retry', ['GET', 'POST', 'PUT']).as('retryAction');
 
 Route.group(() => {
     Route.get('event/log/:id', 'System/EventController.log').as('logEvent');
@@ -32,7 +31,7 @@ Route.group(() => {
 
     Route.get('action/log/:id', 'System/ActionController.log').as('logAction');
     Route.post('action/resend', 'System/ActionController.resend').as('resendAction');
-    
+    Route.route('action/retry', 'System/ActionController.retry', ['GET', 'POST', 'PUT']).as('retryAction');
     Route.get('action/:id?', 'System/ActionController.find').as('findAction');
     Route.post('action', 'System/ActionController.create').as('createAction');
     Route.patch('action/:id', 'System/ActionController.update').as('updateAction');
