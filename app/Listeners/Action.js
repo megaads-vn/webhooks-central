@@ -16,7 +16,6 @@ Action.enforcement = async (event) => {
         if (!element.config || element.config == '' || inputJSON.indexOf(element.config) > -1) {
             RequestService(element, inputJSON, async (error, success) => {
                 if (error) {
-                    console.log("create_action", error);
                     let failAction = new ActionFail;
                     failAction.merge(error.data);
                     await failAction.save();

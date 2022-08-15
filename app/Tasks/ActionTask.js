@@ -9,7 +9,7 @@ class ActionTask {
 
     async cron() {
         setInterval(async () => {
-            let failTime = moment().subtract(30, 'minutes').format('YYYY-DD-MM HH:mm:ss');
+            let failTime = moment().subtract(1, 'hours').format('YYYY-DD-MM HH:mm:ss');
             let fails = await ActionFail.query()
                                         .with('action')
                                         .where('quantity', '<=', Config.get('webhook.try'))
