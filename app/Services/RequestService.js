@@ -18,10 +18,9 @@ function RequestService(action, input, callback) {
     request(params, async (error, response, body) => {
         let fillable = {
             action_id: action.id,
+            status_code: (response && response.statusCode) ? response.statusCode : 500
         };
-        if (response && response.statusCode) {
-            fillable.status_code = response.statusCode || 500;
-        }
+        
         if (input != '') {
             fillable.request = input;
         }
