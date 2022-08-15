@@ -15,7 +15,7 @@ class ActionTask {
                                         .where('quantity', '<=', Config.get('webhook.try'))
                                         .where('updated_at', '<', failTime)
                                         .orderBy('id', 'ASC')
-                                        .limit(30)
+                                        .limit(100)
                                         .fetch();
                                         
             fails.toJSON().forEach(element => {
