@@ -2,6 +2,7 @@
 
 const Action = use('App/Models/Action');
 const ActionLog = use('App/Models/ActionLog');
+const EventLog = use('App/Models/EventLog');
 const BaseController = use('App/Controllers/Http/BaseController');
 const RequestService = use('App/Services/RequestService');
 const { validate } = use('Validator');
@@ -144,12 +145,19 @@ class ActionController extends BaseController {
 
         if (action && action.id) {
             for (var resourceId of resourceIds) {
-                let lastLog = await ActionLog.query()
-                                .where('action_id', '=', actionId)
-                                .where('request', 'LIKE', `%${resourceId}%`)
-                                .select('id', 'request')
-                                .orderBy('id', 'DESC')
-                                .first();
+                // let lastLog = await ActionLog.query()
+                //                 .where('action_id', '=', actionId)
+                //                 .where('request', 'LIKE', `%${resourceId}%`)
+                //                 .select('id', 'request')
+                //                 .orderBy('id', 'DESC')
+                //                 .first();
+
+                let lastLog = await EventLog.query()
+                                    .where('request', 'LIKE', `%${resourceId}%`)
+                                    .select('id', 'request')
+                                    .orderBy('id', 'DESC')
+                                    .first();
+
                 if (lastLog && lastLog.id) {
                     RequestService(action, lastLog.request, async (error, statusCode) => {
                         console.log("statusCode", statusCode);
