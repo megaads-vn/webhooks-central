@@ -17,9 +17,10 @@ class ActionService {
                     action.retry = 1;
                     RequestService(action, inputJSON, async (error, success) => {
                         if (error) {
-                            console.log("RequestService", error);
+                            console.log("RequestService ERROR", error);
                             await ActionFail.query().where('id', '=', element.id).update({quantity: element.quantity + 1});
                         } else {
+                            console.log("RequestService OK", error);
                             await ActionFail.query().where('id', '=', element.id).delete();
                         }
                     });
