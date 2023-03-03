@@ -2,9 +2,10 @@
 
 const Action = use('App/Models/Action');
 const ActionLog = use('App/Models/ActionLog');
-const EventLog = use('App/Models/EventLog');
+const ActionFail = use('App/Models/ActionFail');
 const BaseController = use('App/Controllers/Http/BaseController');
 const RequestService = use('App/Services/RequestService');
+const ActionService = use('App/Services/ActionService');
 const { validate } = use('Validator');
 
 class ActionController extends BaseController {
@@ -136,36 +137,14 @@ class ActionController extends BaseController {
     }
 
     async retry({ request, response }) {
-        let retVal = this.getDefaultStatus();
-        let actionId = request.input('action_id', null);
-        let action = await Action.findOrFail(actionId);
-        action = action.toJSON();
+        let fails = await ActionFail.query()
+                            .with('action')
+                            .orderBy('id', 'DESC')
+                            .limit(1000)
+                            .fetch();
+        await ActionService.failAction(fails.toJSON());
 
-        let resourceIds = request.input('resource_ids');
-
-        if (action && action.id) {
-            for (var resourceId of resourceIds) {
-                // let lastLog = await ActionLog.query()
-                //                 .where('action_id', '=', actionId)
-                //                 .where('request', 'LIKE', `%${resourceId}%`)
-                //                 .select('id', 'request')
-                //                 .orderBy('id', 'DESC')
-                //                 .first();
-
-                let lastLog = await EventLog.query()
-                                    .where('request', 'LIKE', `%${resourceId}%`)
-                                    .select('id', 'request')
-                                    .orderBy('id', 'DESC')
-                                    .first();
-
-                if (lastLog && lastLog.id) {
-                    RequestService(action, lastLog.request, async (error, statusCode) => {
-                        console.log("statusCode", statusCode);
-                    });
-                }
-            }
-            retVal = this.getSuccessStatus();
-        }
+        let retVal = this.getSuccessStatus();
         return response.json(retVal);
     }
 }
