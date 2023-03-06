@@ -142,7 +142,10 @@ class ActionController extends BaseController {
                             .orderBy('id', 'DESC')
                             .limit(1000)
                             .fetch();
-        await ActionService.failAction(fails.toJSON());
+                            
+        await ActionService.failAction(fails.toJSON()).catch(error => {
+            console.log("Retry Action Manual", error);
+        });
 
         let retVal = this.getSuccessStatus();
         return response.json(retVal);

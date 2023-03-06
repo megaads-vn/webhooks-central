@@ -18,7 +18,10 @@ class ActionTask {
                                         .limit(1000)
                                         .fetch();
                                         
-            await ActionService.failAction(fails.toJSON());       
+            await ActionService.failAction(fails.toJSON()).catch(error => {
+                console.log("ActionTask", error);
+            });       
+            
         }, Config.get('webhook.retryAfter'));
     }
 

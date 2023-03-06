@@ -20,7 +20,6 @@ class ActionService {
                             console.log("RequestService ERROR", error);
                             await ActionFail.query().where('id', '=', element.id).update({quantity: element.quantity + 1});
                         } else {
-                            console.log("RequestService OK", error);
                             await ActionFail.query().where('id', '=', element.id).delete();
                         }
                     });
