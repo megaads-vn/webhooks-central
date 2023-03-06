@@ -3,6 +3,7 @@
 const Config = use('Config');
 const ActionService = use('App/Services/ActionService');
 const moment = require('moment');
+const ActionFail = use('App/Models/ActionFail');
 
 class ActionTask {
 
