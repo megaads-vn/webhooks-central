@@ -80,7 +80,11 @@ class EventController extends BaseController {
 
         if (input.name && input.name != '') {
             input.name = input.name.toLowerCase();
-            let exists = await Event.findBy('name', input.name);
+            let queryExists = Event.query().where('name', '=', input.name);
+            if (event.id) {
+                queryExists.where('id', '<>', event.id);
+            }
+            let exists = await queryExists.first();
             if (exists && exists.id) {
                 result.messages = 'Event name exists! Please check again...';
                 return result;
