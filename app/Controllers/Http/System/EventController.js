@@ -121,7 +121,11 @@ class EventController extends BaseController {
         let input = request.all();
     
         if (input.terms && input.terms != '') {
-            query.whereRaw('MATCH(request) AGAINST(? IN NATURAL LANGUAGE MODE)', [input.terms]);
+            if (input.mode == 'like') {
+                query.where('request', 'LIKE', `%${input.terms}%`);
+            } else {
+                query.whereRaw('MATCH(request) AGAINST(? IN NATURAL LANGUAGE MODE)', [input.terms]);
+            }
         }
 
         if (input.method && input.method != '') {

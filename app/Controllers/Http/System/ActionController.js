@@ -116,7 +116,14 @@ class ActionController extends BaseController {
         }
 
         if (input.terms && input.terms != '') {
-            query.whereRaw('MATCH(request, response) AGAINST(? IN NATURAL LANGUAGE MODE)', [input.terms]);
+            if (input.mode == 'like') {
+                query.where(function (query) {
+                    query.where('request', 'LIKE', `%${input.terms}%`);
+                    query.orWhere('response', 'LIKE', `%${input.terms}%`);
+                });
+            } else {
+                query.whereRaw('MATCH(request, response) AGAINST(? IN NATURAL LANGUAGE MODE)', [input.terms]);
+            }
         }
 
         retVal.data = await query.forPage(pageId + 1, pageSize).orderBy('id', 'desc').fetch();

@@ -2,8 +2,10 @@ system.controller('ActionController', function ($scope, $rootScope, $http, $time
 
     this.prototype = new BaseController($scope, $rootScope);
     
+    const DEFAULT_FILTER_LOG = { mode: $scope.searchModes[0].code };
     $scope.pageId = 0; $scope.pageSize = 50; $scope.pagesCount = 0;
-    $scope.filter = {}; $scope.filterLog = {};
+    $scope.filter = {}; 
+    $scope.filterLog = DEFAULT_FILTER_LOG;
     $scope.items = []; $scope.itemLogs = []; 
     $scope.item = {}; $scope.log = {};
     $scope.isSaving = false;
@@ -174,7 +176,7 @@ system.controller('ActionController', function ($scope, $rootScope, $http, $time
     }
 
     $scope.openLog = function (item) {
-        $scope.filterLog = {};
+        $scope.filterLog = DEFAULT_FILTER_LOG;
         $scope.itemLogs = [];
         $scope.log = angular.copy(item);
         $scope.findLog();

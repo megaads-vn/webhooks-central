@@ -11,12 +11,16 @@
                     <div class="col-sm">
                       <input type="text" class="form-control" placeholder="Keyword" ng-model="filterLog.terms" ng-keypress="enterEvent($event, 'log')">
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <select class="form-control" ng-model="filterLog.method" ng-options="item.code as item.code for item in methods">
-                            <option value="">-- All method --</option>
+                            <option value="">-- All methods --</option>
                         </select>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
+                        <select class="form-control" ng-model="filterLog.mode" ng-options="item.code as item.name for item in searchModes">
+                        </select>
+                    </div>
+                    <div class="col-sm-2" style="text-align: center">
                         <button type="button" class="btn btn-primary" ng-click="findLog();">Find</button>
                         <button type="button" class="btn btn-secondary" ng-click="filterLog = {}; findLog();">Reset</button>
                     </div>

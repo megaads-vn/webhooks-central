@@ -9,6 +9,12 @@ var system = angular.module('WebhooksCentral', ['ngSanitize', 'ngclipboard'], fu
 });
 
 function BaseController($scope, $rootScope) {
+
+    $scope.searchModes = [
+        {code: 'full-text', name: 'FULL TEXT'},
+        {code: 'like', name: 'LIKE'}
+    ];
+
     $scope.isJsonString = function (str) {
         try {
             JSON.parse(str);
