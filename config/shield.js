@@ -134,7 +134,7 @@ module.exports = {
   csrf: {
     enable: true,
     methods: ['POST', 'PUT', 'PATCH', 'DELETE'],
-    filterUris: ['/service/(.*)', '/listener/(.*)'],
+    filterUris: ['/service/(.*)', '/listener/(.*)', '/exchangerates_data/refresh'],
     cookieOptions: {
       httpOnly: false,
       sameSite: true,

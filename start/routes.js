@@ -22,6 +22,8 @@ Route.route('/listener/:event', 'WebhooksController.listener', ['GET', 'POST', '
 Route.get('/events', 'System/EventController.index').as('events').middleware(['token']);
 Route.get('/actions', 'System/ActionController.index').as('actions').middleware(['token']);
 Route.route('/service/action/retry', 'System/ActionController.retry', ['GET', 'POST', 'PUT']).as('retryAction');
+Route.get('/exchangerates_data/:type', 'ExchangeController.index').as('exchangeRates');
+Route.post('/exchangerates_data/refresh', 'ExchangeController.refresh').as('refreshExchangeRates');
 
 Route.group(() => {
     Route.get('event/log/:id', 'System/EventController.log').as('logEvent');

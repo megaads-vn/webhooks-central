@@ -41,3 +41,5 @@ Date.prototype.getDateTime = (character = ':') => {
     day = (day < 10 ? "0" : "") + day;
     return year + "-" + month + "-" + day + " " + hour + character + min + character + sec;
 }
+
+global.cacheData = {};
