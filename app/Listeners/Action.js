@@ -16,6 +16,8 @@ Action.enforcement = async (event) => {
         if (!element.config || element.config == '' || inputJSON.indexOf(element.config) > -1) {
             RequestService(element, inputJSON, async (error, success) => {
                 if (error) {
+                    console.error('Callback error:', error.message);
+                    console.info('Callback error data:', error.data);
                     let failAction = new ActionFail;
                     failAction.merge(error.data);
                     await failAction.save();

@@ -47,7 +47,7 @@ function RequestService(action, input, callback) {
                     request: input,
                     quantity: 0
                 };
-                callback({ error: error, data: errorCallback, fillable: fillable }, null);
+                callback({ message: error, data: errorCallback, fillable: fillable }, null);
             } else {
                 callback(null, response.statusCode);
             }

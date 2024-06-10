@@ -10,11 +10,9 @@ class ActionTask {
     async cron() {
         setInterval(async () => {
             console.log("Retry Action Fail Execute", new Date());
-            let failTime = moment().subtract(1, 'hours').format('YYYY-DD-MM HH:mm:ss');
             let fails = await ActionFail.query()
                                         .with('action')
                                         .where('quantity', '<=', Config.get('webhook.try'))
-                                        .where('updated_at', '<', failTime)
                                         .orderBy('id', 'ASC')
                                         .limit(1000)
                                         .fetch();
