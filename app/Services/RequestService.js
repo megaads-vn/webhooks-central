@@ -41,7 +41,7 @@ function RequestService(action, input, callback) {
         await logAction.save();
 
         if (typeof callback == "function") {
-            if (error || fillable.status_code >= 400) {
+            if (error || fillable.status_code > 400) {
                 let errorCallback = {
                     action_id: action.id,
                     request: input,
