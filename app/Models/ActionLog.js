@@ -33,25 +33,25 @@ class ActionLog extends Model {
         return decompressed.toString('utf-8');
     }
 
-    setResponse (value) {
-        if (!value) return null;
+    // setResponse (value) {
+    //     if (!value) return null;
 
-        const compressed = zlib.gzipSync(Buffer.from(value, 'utf-8'));
-        return compressed.toString('base64');
-    }
+    //     const compressed = zlib.gzipSync(Buffer.from(value, 'utf-8'));
+    //     return compressed.toString('base64');
+    // }
 
-    getResponse (value) {
-        if (!value) return null;
+    // getResponse (value) {
+    //     if (!value) return null;
 
-        let buffer;
-        if (typeof value === 'string') {
-            buffer = Buffer.from(value, 'base64');
-        } else {
-            buffer = value;
-        }
-        const decompressed = zlib.gunzipSync(buffer);
-        return decompressed.toString('utf-8');
-    }
+    //     let buffer;
+    //     if (typeof value === 'string') {
+    //         buffer = Buffer.from(value, 'base64');
+    //     } else {
+    //         buffer = value;
+    //     }
+    //     const decompressed = zlib.gunzipSync(buffer);
+    //     return decompressed.toString('utf-8');
+    // }
 
 }
 
