@@ -137,7 +137,7 @@ class ActionController extends BaseController {
         if (action.id) {
             retVal = this.getSuccessStatus();
             RequestService(action.toJSON(), input, function (error, statusCode) {
-                console.log("statusCode", statusCode);
+                // do something
             });
         }
         return response.json(retVal);
